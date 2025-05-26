@@ -1,14 +1,14 @@
 body {
+
+     margin: 0;
+    padding: 1rem;
     font-family: Arial, sans-serif;
-    
-    /* background: linear-gradient(135deg, #2c2c8a, #8a56c2); */
-    background-image: url(./Task\ app\ img.jpeg);
+    background: linear-gradient(135deg, #5b2bbc, #210430);
+    /* background-image: url(./Task\ app\ img.jpeg); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* margin: 0;
-    padding: 0; */
-     text-align: center; 
+    text-align: center; 
     width: 100vw;
     height: 100vh;
 }
@@ -96,7 +96,9 @@ color: #fff;
 #taskContainer {
     display: flex;
     flex-wrap: wrap;
-    margin: 20px;
+    /* margin: 20px; */
+     width: 100%;
+  margin-top: 0.5rem;
 }
 
 .taskCard {
@@ -106,21 +108,21 @@ color: #fff;
     align-items: stretch;
     background-color: #ffffff;
     box-shadow: 5px 5px 20px rgba(203, 205, 211, 0.1);
-    padding: 16px;
+    padding: 1rem;
     top: 1rem;
     width: 250px;
     min-height: 175px;
-    margin: 15px;
+    margin: 5px;
     border-radius: 4px;
     transition: box-shadow 0.3s ease;
 }
 
 .taskCard.completed {
-    background: linear-gradient(to bottom right, #B0DB7D 40%, #99DBB4 100%);
+    background: linear-gradient(to bottom right, #80b93a 40%, #99DBB4 100%);
 }
 
 .taskCard.pending {
-    background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
+    background: linear-gradient(to bottom left, #e25c70 40%, #efc4a9 100%);
 }
 
 .taskCard:hover {
@@ -130,7 +132,8 @@ color: #fff;
 .taskCard p {
     margin: 0;
     font-size: 1.2rem;
-    color: #fff;
+    font-weight: 800;
+    color: #ffffff;
     word-wrap: break-word;
 }
 
@@ -138,8 +141,8 @@ color: #fff;
     margin-top: 10px;
     font-size: 14px;
     font-size: 1.1em;
-    font-weight: 100;
-    color: #5e5e5e;
+    font-weight: 200;
+    color: #201b1b;
     letter-spacing: 1px;
 }
 
@@ -166,16 +169,16 @@ color: #fff;
 }
 
 .green {
-    color: #4ec07d;
+    color: #328052;
 }
 
 .red {
-    color: #e96075;
+    color: #c95869;
 }
 
 .button-box span {
     font-size: 0.9em;
-    font-weight: 100;
+    font-weight: 250;
     letter-spacing: 3px;
     padding-top: 5px;
     /* color: #FCFCFC; */

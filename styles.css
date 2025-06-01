@@ -1,20 +1,32 @@
-body {
-
-     margin: 0;
-    padding: 1rem;
+ body {
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #5b2bbc, #210430);
-    /* background-image: url(./Task\ app\ img.jpeg); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     text-align: center; 
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box; /*Ensures padding and border are included in element's total width and height */
+}
+
+* {
+    box-sizing: border-box;  /* Applies box-sizing to all elements */
+}
+
+.app-container {
+    padding: 1rem;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
 }
 
 header {
-    /* background-color: #000000; */
     padding: 10px;
     text-align: center;
     color: #34359b;
@@ -22,9 +34,10 @@ header {
 
 .card {
     background-color: #adde4c;
-    width: 550px;
-    margin: 20px auto;
-    padding: 3rem 2rem;
+    width: 90%;
+    max-width: 550px;
+    margin: 20px auto; 
+    padding: 2rem 1.5rem; 
     border-radius: 10px;
     box-shadow: 0 4px 6px rgb(69, 8, 8);
     color: #220909;
@@ -32,7 +45,7 @@ header {
 
 h1 {
     color: #420909;
-    font-size: 40px;
+    font-size: clamp(1.75rem, 5vw, 2.5rem); /* Responsive font size */
     margin: 0 0 1.2em 0;
     letter-spacing: 2px;
 }
@@ -42,15 +55,17 @@ h1 {
     justify-content: center;
     align-items: center;
     margin-top: 10px;
+    width: 100%;
 }
 
 h3 {
-    margin-top: 0;
+    margin-top: 0; /* Removes default margin from h3 */
 }
 
 .task-input {
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 #taskInput {
@@ -62,6 +77,8 @@ h3 {
     color: #333;
     border-radius: 5px 0 0 5px;
     transition: background-color 0.3s ease;
+    width: calc(100% - 5rem); /* Adjust width to account for button */
+    font-size: 1rem;
 }
 
 #taskInput::placeholder {
@@ -73,7 +90,6 @@ h3 {
     background-color: #e6e6e6;
 }
 
-
 button[type="submit"] {
     background-color: #ff4e00;
     background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
@@ -84,49 +100,60 @@ button[type="submit"] {
     margin-left: -15px;
     cursor: pointer;
     width: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
 
 button:hover {
     background-color: #a4508b;
-background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
-color: #fff;
+    background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
+    color: #fff;
+}
+
+.no-tasks {
+    margin: 2rem 0;
+    font-style: italic;
+    color: #333;
 }
 
 #taskContainer {
     display: flex;
     flex-wrap: wrap;
-    /* margin: 20px; */
-     width: 100%;
-  margin-top: 0.5rem;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1.5rem;
+    gap: 10px;
 }
 
 .taskCard {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
+    justify-content: space-between;
     background-color: #ffffff;
     box-shadow: 5px 5px 20px rgba(203, 205, 211, 0.1);
     padding: 1rem;
-    top: 1rem;
-    width: 250px;
-    min-height: 175px;
-    margin: 5px;
+    width: 100%;
+    min-height: 150px;
+    margin-bottom: 15px;
     border-radius: 4px;
-    transition: box-shadow 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .taskCard.completed {
+    margin: 20px; 
     background: linear-gradient(to bottom right, #80b93a 40%, #99DBB4 100%);
+     
 }
 
 .taskCard.pending {
+    margin: 20px; 
     background: linear-gradient(to bottom left, #e25c70 40%, #efc4a9 100%);
 }
 
 .taskCard:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
 }
 
 .taskCard p {
@@ -139,11 +166,17 @@ color: #fff;
 
 .taskCard .status {
     margin-top: 10px;
-    font-size: 14px;
-    font-size: 1.1em;
+    font-size: 0.9rem;
     font-weight: 200;
     color: #201b1b;
     letter-spacing: 1px;
+}
+
+.task-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 1rem;
 }
 
 /* =========================== */
@@ -156,16 +189,23 @@ color: #fff;
     outline: 0;
     border: none;
     box-shadow: 2px 2px 10px rgba(119, 119, 119, 0.5);
-    transition: all 0.5s ease-in-out;
-    margin-top: 1rem;
-    padding: 12px 10px;
+    transition: all 0.3s ease-in-out;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button-box:hover {
     background: #efefef;
-    transform: scale(1.05);
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;;
+    transform: scale(1.02);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.button-box.delete:hover {
+    background: #ffeded;
 }
 
 .green {
@@ -177,13 +217,13 @@ color: #fff;
 }
 
 .button-box span {
-    font-size: 0.9em;
-    font-weight: 250;
-    letter-spacing: 3px;
-    padding-top: 5px;
-    /* color: #FCFCFC; */
-    padding-bottom: 5px;
+    font-size: 0.85em;
+    font-weight: 500;
+    letter-spacing: 1px;
     text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 /* =========================== */
@@ -196,18 +236,22 @@ color: #fff;
 
 .overlay::before {
     content: "";
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10;
 }
+
+  /* This is the fade-in animation for the confirmation popup...... */
 
 @keyframes fade {
     from {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0; 
+        
+        transform: translate(-50%, -50%) scale(0.8); 
     }
 
     to {
@@ -218,32 +262,35 @@ color: #fff;
 
 .confirm {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
+    width: 90%;
     min-width: 280px;
-    max-width: 500px;
+    max-width: 350px;
     height: auto;
     background: #E2E2E2;
     border-radius: 10px;
     padding: 0;
     margin: 0;
     border-top: 1px solid white;
-    animation: fade 0.5s ease 1 forwards;
+    animation: fade 0.3s ease 1 forwards;
+    z-index: 20;
 }
 
 .confirm h1 {
     text-align: center;
     font-size: 1.2rem;
     margin: 1.5rem 1rem 0.5rem;
+    color: #333;
 }
 
 .confirm p {
     text-align: center;
     font-size: 1rem;
-    margin: 0 2rem 4.5rem;
+    margin: 0 1rem 4rem;
+    color: #555;
 }
 
 .confirm button {
@@ -256,6 +303,7 @@ color: #fff;
     position: absolute;
     bottom: 0;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .confirm button:nth-of-type(1) {
@@ -279,4 +327,137 @@ color: #fff;
 
 .confirm button:active {
     background: #D6D6D6;
+}
+
+   /* Responsive media queries */
+
+@media (min-width: 576px) { 
+    .taskCard {
+        width: calc(50% - 10px); 
+    }
+    
+    .task-actions {           
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+    }
+    .button-box.taskCard.pending { 
+      margin: 1.5rem; 
+      /* padding: 1rem; */
+   }
+   .button-box.taskCard.completed { 
+      margin: 1.5rem; 
+      /* padding: 1rem; */
+   }
+   
+}
+
+@media (min-width: 768px) {
+    .card {
+        padding: 3rem 2rem;
+    }
+    
+    #taskInput {
+        padding: 15px 12px;
+    }
+    
+    .taskCard {
+        width: calc(33.33% - 10px);
+        min-height: 175px;
+    }
+    
+    .confirm {
+        max-width: 400px;
+    }
+    
+    .confirm p {
+        margin: 0 2rem 4.5rem;
+    }
+     .button-box.taskCard.pending { 
+      margin: 1.5rem; 
+      /* padding: 1rem; */
+   }
+   .button-box.taskCard.completed { 
+      margin: 1.5rem; 
+      /* padding: 1rem; */
+   }
+}
+
+@media (min-width: 992px) {
+    body {
+        padding: 1.5rem;
+    }
+    
+    .taskCard:hover {
+        transform: translateY(-4px);
+    }
+    
+    .button-box:hover {
+        transform: scale(1.05);
+    }
+     .button-box.taskCard.pending { 
+      margin: 1.5rem; 
+      /* padding: 1rem; */
+   }
+   .button-box.taskCard.completed { 
+      margin: 1.5rem; 
+      /* padding: 1rem; */
+   }
+}
+
+@media (max-width: 575px) {
+    body {
+        padding: 0.5rem;
+    }
+    
+    .card {
+        padding: 1.5rem 1rem;
+        margin: 10px auto;
+    }
+    
+    h1 {
+        margin-bottom: 1em;
+    }
+    
+    #taskInput, button[type="submit"] {
+        padding: 12px 10px;
+    }
+    
+    .taskCard {
+        padding: 0.875rem;
+        min-height: 135px;
+         margin: 10px 0;
+    }
+    
+    .taskCard p {
+        font-size: 1.1rem;
+    }
+    
+    .button-box {
+        padding: 8px;
+        border-radius: 8px; 
+    }
+    
+    .button-box span {
+        font-size: 0.75em;
+        letter-spacing: 0.5px;
+    }
+     .button-box.taskCard.pending { 
+      /* margin: 1.5rem;  */
+      margin-bottom: 2rem;
+      /* padding: 1rem; */
+   }
+   .button-box.taskCard.completed { 
+      margin: 1.5rem; 
+       margin-bottom: 2rem;
+      /* padding: 1rem; */
+   }
+   .task-actions {           
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
 }
